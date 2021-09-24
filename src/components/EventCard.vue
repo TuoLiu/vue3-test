@@ -1,8 +1,11 @@
 <template>
-  <div class="event-card">
-    <span>@{{ event.time }} on {{ event.date }}</span>
-    <h4>{{ event.title }}</h4>
-  </div>
+  <!--<router-link :to="toURL">-->
+  <router-link :to="{ name: 'EventDetails', params: { id: event.id } }" class="event-link">
+    <div class="event-card">
+      <span>@{{ event.time }} on {{ event.date }}</span>
+      <h4>{{ event.title }}</h4>
+    </div>
+  </router-link>
 </template>
 
 <script>
@@ -12,6 +15,11 @@ export default {
     event: {
       type: Object,
       required: true,
+    },
+  },
+  computed: {
+    toURL() {
+      return "/event/" + this.event.id
     },
   },
 }
@@ -29,5 +37,10 @@ export default {
 .event-card:hover {
   transform: scale(1.01);
   box-shadow: 0 3px 12px 0 rgba(0, 0, 0, 0.2);
+}
+
+.event-link {
+  color: #2c3e50;
+  text-decoration: none;
 }
 </style>
