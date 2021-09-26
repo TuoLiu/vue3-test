@@ -1,12 +1,13 @@
 import { createRouter, createWebHistory } from "vue-router"
-import Home from "../views/EventCard.vue"
-import EventDetials from "../components/EventDetails.vue"
+import EventList from "../views/EventCard.vue"
+import EventDetails from "../components/EventDetails.vue"
+import EventCreate from "../views/EventCreate.vue"
 
 const routes = [
   {
     path: "/",
-    name: "Home",
-    component: Home,
+    name: "EventList",
+    component: EventList,
   },
   {
     path: "/about",
@@ -18,10 +19,15 @@ const routes = [
       import(/* webpackChunkName: "about" */ "../views/About.vue"),
   },
   {
+    path: "/event/create",
+    name: "EventCreate",
+    component: EventCreate,
+  },
+  {
     path: "/event/:id",
     name: "EventDetails",
     props: true,
-    component: EventDetials,
+    component: EventDetails,
   },
 ]
 
