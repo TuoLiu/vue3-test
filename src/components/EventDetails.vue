@@ -7,25 +7,31 @@
 </template>
 
 <script>
-import EventService from "../services/EventService"
+// import EventService from "../services/EventService"
 
 export default {
   name: "EventDetails",
   data() {
     return {
-      event: null,
+      // event: null,
     }
   },
   props: ["id"],
   created() {
     // fetch event (by id) and set local event data
-    EventService.getEvent(this.id)
-      .then((response) => {
-        this.event = response.data
-      })
-      .catch((error) => {
-        console.log(error)
-      })
+    // EventService.getEvent(this.id)
+    //   .then((response) => {
+    //     this.event = response.data
+    //   })
+    //   .catch((error) => {
+    //     console.log(error)
+    //   })
+    this.$store.dispatch("fetchEvent", this.id)
+  },
+  computed: {
+    event() {
+      return this.$store.state.event
+    },
   },
 }
 </script>

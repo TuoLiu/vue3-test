@@ -48,7 +48,6 @@
 
 <script>
 import { v4 as uuidv4 } from "uuid"
-import EventService from "../services/EventService"
 
 export default {
   data() {
@@ -79,17 +78,19 @@ export default {
       const event = {
         ...this.event,
         id: uuidv4(),
-        organizer: this.$store.state.user
+        organizer: this.$store.state.user,
       }
 
-      EventService.postEvent(this.event)
-        .then(() => {
-          // add event to Vuex state
-          this.$store.commit("ADD_EVENT", event)
-        })
-        .catch((error) => {
-          console.log(error)
-        })
+      this.$store.dispatch("createEvent", event)
+
+      // EventService.postEvent(this.event)
+      //   .then(() => {
+      //     // add event to Vuex state
+      //     this.$store.commit("ADD_EVENT", event)
+      //   })
+      //   .catch((error) => {
+      //     console.log(error)
+      //   })
     },
   },
 }
