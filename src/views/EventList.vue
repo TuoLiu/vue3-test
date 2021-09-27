@@ -8,12 +8,12 @@
 </template>
 
 <script>
-// @ is an alias to /src
-import EventCard from "../components/EventCard.vue"
+import EventCard from '../components/EventCard.vue'
 // import EventService from "../services/EventService"
+import { mapState } from 'vuex'
 
 export default {
-  name: "Home",
+  name: 'Home',
   components: {
     EventCard,
   },
@@ -32,12 +32,19 @@ export default {
     //     console.log(error)
     //   })
 
-    this.$store.dispatch("fetchEvents")
+    this.$store.dispatch('fetchEvents').catch((error) => {
+      console.log('hhh')
+      this.$router.push({
+        name: 'ErrorDisplay',
+        params: { error: error },
+      })
+    })
   },
   computed: {
-    events() {
-      return this.$store.state.events
-    },
+    // events() {
+    //   return this.$store.state.events
+    // },
+    ...mapState(['events']),
   },
 }
 </script>

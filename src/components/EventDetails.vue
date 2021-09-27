@@ -10,13 +10,13 @@
 // import EventService from "../services/EventService"
 
 export default {
-  name: "EventDetails",
+  name: 'EventDetails',
   data() {
     return {
       // event: null,
     }
   },
-  props: ["id"],
+  props: ['id'],
   created() {
     // fetch event (by id) and set local event data
     // EventService.getEvent(this.id)
@@ -26,7 +26,12 @@ export default {
     //   .catch((error) => {
     //     console.log(error)
     //   })
-    this.$store.dispatch("fetchEvent", this.id)
+    this.$store.dispatch('fetchEvent', this.id).catch((error) => {
+      this.$router.push({
+        name: 'ErrorDisplay',
+        params: { error: error },
+      })
+    })
   },
   computed: {
     event() {
